@@ -21,7 +21,6 @@ public class MainCommands implements CommandExecutor {
         this.plugin = plugin;
         plugin.getCommand("uci").setExecutor(this);
         plugin.getCommand("fly").setExecutor(new CommandFly(this));
-        plugin.getCommand("vote").setExecutor(new CommandVote(this));
         plugin.getCommand("xpbottle").setExecutor(new CommandXPBottle(this));
         plugin.getCommand("catvision").setExecutor(new CommandCatVision(this));
         plugin.getCommand("energydrink").setExecutor(new CommandEnergyDrink(this));

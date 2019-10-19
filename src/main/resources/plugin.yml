@@ -13,9 +13,6 @@ commands:
     description: Fly
   xpbottle:
     description: xpbottle
-  vote:
-    description: Vote
-    aliases: [oy]
   catvision:
     description: CatVision
     aliases: [kedigörüşü, kedigözü, kedigozu, kedigorusu]
