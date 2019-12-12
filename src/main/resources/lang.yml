@@ -1,0 +1,49 @@
+prefix:
+  bilgiPrefix: "&b&lUNIOCRAFT &2->&a"
+  dikkatPrefix: "&b&lUNIOCRAFT &2->&6"
+  hataPrefix: "&b&lUNIOCRAFT &2->&c"
+  consolePrefix: "[UnioEssentials] "
+commands:
+  wrongCommand: "%hataPrefix% Hatalı bir komut girdiniz!"
+  uci:
+    give:
+      playerNotFound: "%hataPrefix% Oyuncu bulunamadı!"
+      itemNotFound: "%hataPrefix% Böyle bir eşya yok!"
+      inventoryIsFull: "%hataPrefix% Oyuncunun envanterinde yeterli yer yok!"
+      success: "%bilgiPrefix% Eşya başarıyla verildi!"
+  xpbottle:
+    usage: "%bilgiPrefix% Kullanım: /xpbottle <miktar>"
+    notEnoughXP: "%hataPrefix% Yeterli XP'ye sahip olmadığınız için tecrübe iksiri yaratılamadı."
+    notEnoughSpace: "%hataPrefix% Oyuncunun envanterinde yeterli yer yok!"
+    success: "%bilgiPrefix% Tecrübenizi başarıyla şişelediniz."
+xpBottle:
+  name: "&eTecrübe İksiri"
+  lore:
+    - "&6"
+    - "&6XP Miktarı: &a%amount%"
+    - "&6İksir Sahibi: &a%player%"
+    - "&6"
+  used: "%bilgiPrefix% Tecrübe iksirini kullandınız ve %xpAmount% miktarda XP hesabınıza eklendi."
+vipCard:
+  vipActivated: "%bilgiPrefix% 1 aylık VIP üyelik etkinleştirildi! İyi oyunlar dileriz!"
+  vipNotActivated: "%hataPrefix% VIP aktivasyonu sırasında bir hata oluştu! Lütfen sorunu düzeltmek ve VIP üyeliğinizi aktifleştirmek için destek bölümüyle iletişime geçin!"
+  confirmation: "%dikkatPrefix% Elinizdeki VIP kartını kullanmak istediğinize eminseniz 10 saniye içerisinde karta yeniden sağ tıklayın!"
+flyPerk:
+  activated: "%bilgiPrefix% Sınırsız uçuş hakkı etkinleştirildi. /fly komutuyla uçabilirsin!"
+  alreadyActivated: "%hataPrefix% Zaten uçuş hakkınız olduğundan eşya kullanılamadı!"
+  confirmation: "%dikkatPrefix% Elinizdeki uçuş kartını kullanmak istediğinize eminseniz 10 saniye içerisinde karta yeniden sağ tıklayın!"
+sellChest:
+  youCantMerge: "%hataPrefix% Satış Sandığını başka sandıklarla birleştiremezsiniz!"
+  noEmptySpace: "%hataPrefix% Envanterinizde yer olmadığı için satış sandığını kıramadınız!"
+protections:
+  cantPutToAnvil: "%hataPrefix% Bu eşyayı örse koymak engellenmiştir."
+  droppedSpecialItem: "%hataPrefix% Yere bir özel eşya attınız! Bir an önce, kaybolmadan ya da başkası almadan eşyanızı alın."
+  youCantDropSpecialItems: "%hataPrefix% Özel eşyaların yere atılması kaybolma riskine karşı engellenmiştir."
+hooks:
+  denyMessages:
+    askyblock: "%hataPrefix% Adanızda olmadığınız için bunu yapamadınız."
+    combatlogx: "%hataPrefix% Savaşta olduğunuz için bunu yapamadınız."
+    factions: "%hataPrefix% Bunu burada yapamazsınız!"
+    lockettepro: "%hataPrefix% Bu blok kilitlidir!"
+    trademe: "%hataPrefix% Ticaret yaparken para miktarınızı değiştiremezsiniz!"
+    worldguard: "%hataPrefix% Bunu burada yapamazsınız!"

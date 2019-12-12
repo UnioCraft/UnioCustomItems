@@ -1,7 +1,6 @@
 package me.uniodex.uniocustomitems.listeners;
 
 import me.uniodex.uniocustomitems.CustomItems;
-import me.uniodex.uniocustomitems.managers.ItemManager.Items;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -34,8 +33,7 @@ public class ProtectionListeners implements Listener {
                 Player p = (Player) event.getWhoClicked();
                 ItemStack item = event.getCurrentItem();
                 if (item != null) {
-                    for (Items i : Items.values()) {
-                        ItemStack specialItem = plugin.itemManager.getItem(i);
+                    for (ItemStack specialItem : plugin.getItemManager().getItems().values()) {
                         if (item.getItemMeta() == null || item.getItemMeta().getDisplayName() == null || specialItem.getItemMeta() == null || specialItem.getItemMeta().getDisplayName() == null) {
                             continue;
                         }
@@ -43,14 +41,14 @@ public class ProtectionListeners implements Listener {
                         if (item.getType().equals(specialItem.getType())) {
                             if (item.getItemMeta().getDisplayName().equalsIgnoreCase(specialItem.getItemMeta().getDisplayName())) {
                                 event.setCancelled(true);
-                                p.sendMessage(CustomItems.hataprefix + "Bu eşyayı örse koymak engellenmiştir.");
+                                p.sendMessage(plugin.getMessage("protections.cantPutToAnvil"));
                             }
                         }
                     }
 
                     if (item.getType().equals(Material.HOPPER) || item.getType().equals(Material.CHEST) || item.getType().equals(Material.TRAPPED_CHEST)) {
                         event.setCancelled(true);
-                        p.sendMessage(CustomItems.hataprefix + "Bu eşyayı örse koymak engellenmiştir.");
+                        p.sendMessage(plugin.getMessage("protections.cantPutToAnvil"));
                     }
                 }
             }
@@ -63,13 +61,12 @@ public class ProtectionListeners implements Listener {
         ItemStack item = event.getItemDrop().getItemStack();
 
         if (player.getInventory().firstEmpty() == -1) {
-            player.sendMessage(CustomItems.hataprefix + "Yere bir özel eşya attınız! Bir an önce, kaybolmadan ya da başkası almadan eşyanızı alın.");
+            player.sendMessage(plugin.getMessage("protections.droppedSpecialItem"));
             return;
         }
 
         if (item != null) {
-            for (Items i : Items.values()) {
-                ItemStack specialItem = plugin.itemManager.getItem(i);
+            for (ItemStack specialItem : plugin.getItemManager().getItems().values()) {
                 if (item.getItemMeta() == null || item.getItemMeta().getDisplayName() == null || specialItem.getItemMeta() == null || specialItem.getItemMeta().getDisplayName() == null) {
                     continue;
                 }
@@ -77,11 +74,11 @@ public class ProtectionListeners implements Listener {
                 if (item.getType().equals(specialItem.getType())) {
                     if (item.getItemMeta().getDisplayName().equalsIgnoreCase(specialItem.getItemMeta().getDisplayName())) {
                         if (player.getInventory().firstEmpty() == -1) {
-                            player.sendMessage(CustomItems.hataprefix + "Yere bir özel eşya attınız! Bir an önce, kaybolmadan ya da başkası almadan eşyanızı alın.");
+                            player.sendMessage(plugin.getMessage("protections.droppedSpecialItem"));
                             return;
                         }
                         event.setCancelled(true);
-                        player.sendMessage(CustomItems.hataprefix + "Özel eşyaların yere atılması kaybolma riskine karşı engellenmiştir.");
+                        player.sendMessage(plugin.getMessage("protections.youCantDropSpecialItems"));
                     }
                 }
             }
@@ -91,7 +88,7 @@ public class ProtectionListeners implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDeath(EntityDeathEvent event) {
         Entity entity = event.getEntity();
-        String bossOwnerName = plugin.unioProtections.getCheckManager().getBossOwnerManager().getBossOwner(entity.getUniqueId());
+        String bossOwnerName = plugin.getUnioProtections().getCheckManager().getBossOwnerManager().getBossOwner(entity.getUniqueId());
         if (bossOwnerName == null) return;
 
         Player bossOwner = Bukkit.getPlayerExact(bossOwnerName);

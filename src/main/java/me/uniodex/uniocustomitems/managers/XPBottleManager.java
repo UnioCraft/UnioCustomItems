@@ -9,36 +9,34 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class XPBottleManager {
 
     private CustomItems plugin;
-    private String displayName = ChatColor.YELLOW + "Tecrübe İksiri";
 
     public XPBottleManager(CustomItems plugin) {
         this.plugin = plugin;
     }
 
     public String giveXPBottle(Player player, Integer amount) {
+        if (player.getInventory().firstEmpty() == -1) {
+            return plugin.getMessage("commands.xpbottle.notEnoughSpace");
+        }
         if (SetExpFix.getTotalExperience(player) < amount) {
-            return CustomItems.hataprefix + "Yeterli XP'ye sahip olmadığınız için tecrübe iksiri yaratılamadı.";
+            return plugin.getMessage("commands.xpbottle.notEnoughXP");
         }
         SetExpFix.setTotalExperience(player, SetExpFix.getTotalExperience(player) - amount);
         player.getInventory().addItem(getXPBottle(player.getName(), amount));
-        return CustomItems.bilgiprefix + "Tecrübenizi başarıyla şişelediniz.";
+        return plugin.getMessage("commands.xpbottle.success");
     }
 
-    public ItemStack getXPBottle(String player, Integer amount) {
+    private ItemStack getXPBottle(String player, Integer amount) {
         ItemStack xpBottle = new ItemStack(Material.EXP_BOTTLE);
         ItemMeta meta = xpBottle.getItemMeta();
-        meta.setDisplayName(displayName);
-        List<String> lore = new ArrayList<>();
-        lore.add(" ");
-        lore.add(ChatColor.GOLD + "XP Miktarı: " + ChatColor.GREEN + amount);
-        lore.add(ChatColor.GOLD + "İksir Sahibi: " + ChatColor.GREEN + player);
-        lore.add(" ");
+        meta.setDisplayName(plugin.getMessage("xpBottle.name"));
+        List<String> lore = plugin.getMessages("xpBottle.lore");
+        lore.replaceAll(l -> l.replaceAll("%amount%", String.valueOf(amount)).replaceAll("%player%", player));
         meta.setLore(lore);
         xpBottle.setItemMeta(meta);
 
@@ -50,7 +48,7 @@ public class XPBottleManager {
 
         String amountLore = ChatColor.stripColor(item.getItemMeta().getLore().get(1));
 
-        return Integer.valueOf(amountLore.substring(amountLore.lastIndexOf(" ") + 1));
+        return Integer.parseInt(amountLore.substring(amountLore.lastIndexOf(" ") + 1));
     }
 
     public boolean isXPBottle(ItemStack item) {
@@ -59,7 +57,7 @@ public class XPBottleManager {
         if (!item.getItemMeta().hasDisplayName()) return false;
         if (!item.getItemMeta().hasLore()) return false;
 
-        if (!item.getItemMeta().getDisplayName().equals(displayName)) return false;
+        if (!item.getItemMeta().getDisplayName().equals(plugin.getMessage("xpBottle.name"))) return false;
         return true;
     }
 

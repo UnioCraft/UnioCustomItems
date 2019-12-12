@@ -5,55 +5,51 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.*;
-import java.nio.channels.FileChannel;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
 
 public class ConfigManager {
 
     private CustomItems plugin;
-    private HashMap<String, FileConfiguration> configurations = new HashMap<String, FileConfiguration>();
+    private Map<Config, FileConfiguration> configurations = new HashMap<>();
 
     public ConfigManager(CustomItems plugin) {
         this.plugin = plugin;
-        registerConfig("chests.yml");
-        registerConfig("fly.yml");
 
-        for (String fileName : configurations.keySet()) {
-            reloadConfig(fileName);
-            configurations.get(fileName).options().copyDefaults(true);
-            saveConfig(fileName);
+        plugin.saveDefaultConfig();
+
+        for (Config config : Config.values()) {
+            registerConfig(config);
+        }
+
+        for (Config config : configurations.keySet()) {
+            reloadConfig(config);
+            configurations.get(config).options().copyDefaults(true);
+            saveConfig(config);
         }
     }
 
-    // Get Configs
-
-    public FileConfiguration getChestsData() {
-        return configurations.get("chests.yml");
+    public FileConfiguration getConfig(Config config) {
+        return configurations.get(config);
     }
 
-    public FileConfiguration getFlyData() {
-        return configurations.get("fly.yml");
+    private void registerConfig(Config config) {
+        configurations.put(config, YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), getFileName(config))));
     }
 
-    public void saveChestsConfig() {
-        saveConfig("chests.yml");
-    }
+    public void reloadConfig(Config config) {
+        String fileName = getFileName(config);
 
-    public void saveFlyConfig() {
-        saveConfig("fly.yml");
-    }
-
-    private void registerConfig(String name) {
-        configurations.put(name, YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), name)));
-    }
-
-    private void reloadConfig(String fileName) {
         InputStream inputStream = plugin.getResource(fileName);
         if (inputStream != null) {
             InputStreamReader reader = new InputStreamReader(inputStream);
             YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(reader);
-            configurations.get(fileName).setDefaults(defConfig);
+            configurations.get(config).setDefaults(defConfig);
             try {
                 reader.close();
                 inputStream.close();
@@ -63,62 +59,21 @@ public class ConfigManager {
         }
     }
 
-    private void saveConfig(String fileName) {
+    public void saveConfig(Config config) {
+        String fileName = getFileName(config);
+
         try {
-            configurations.get(fileName).save(new File(plugin.getDataFolder(), fileName));
+            configurations.get(config).save(new File(plugin.getDataFolder(), fileName));
         } catch (IOException ex) {
-            Bukkit.getConsoleSender().sendMessage("Couldn't save " + fileName + "!");
+            Bukkit.getLogger().log(Level.SEVERE, "Couldn't save " + fileName + "!");
         }
     }
 
-    public void deleteFile(File path) {
-        if (path.exists()) {
-            for (File f : path.listFiles()) {
-                if (f.isDirectory()) deleteFile(f);
-                else f.delete();
-            }
-        }
-        path.delete();
+    private String getFileName(Config config) {
+        return config.toString().toLowerCase() + ".yml";
     }
 
-    public void copyFile(File source, File target) {
-        try {
-            if (source.isDirectory()) {
-                if (!target.exists()) target.mkdirs();
-                String files[] = source.list();
-                for (String file : files) {
-                    File srcFile = new File(source, file);
-                    File destFile = new File(target, file);
-                    copyFile(srcFile, destFile);
-                }
-
-            } else {
-                FileInputStream inputStream = new FileInputStream(source);
-                FileOutputStream outputStream = new FileOutputStream(target);
-                FileChannel inChannel = inputStream.getChannel();
-                FileChannel outChannel = outputStream.getChannel();
-                try {
-                    inChannel.transferTo(0, inChannel.size(), outChannel);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (inChannel != null) inChannel.close();
-                    if (outChannel != null) outChannel.close();
-                    inputStream.close();
-                    outputStream.close();
-                }
-            }
-        } catch (IOException e) {
-            Bukkit.getConsoleSender().sendMessage("Failed to copy files!");
-            e.printStackTrace();
-        }
-    }
-
-    public long getSize(File file) {
-        long length = 0;
-        if (file.isDirectory()) {
-            for (String f : file.list()) length += getSize(new File(file, f));
-        } else length = file.length();
-        return length;
+    public enum Config {
+        LANG, CHESTS
     }
 }

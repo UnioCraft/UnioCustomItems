@@ -1,21 +1,13 @@
 name: UnioCustomItems
 main: me.uniodex.uniocustomitems.CustomItems
 author: 'UnioDex'
-version: 4.0
+version: 5.0
 description: UnioCustomItems
-depend: [Vault, WorldEdit, WorldGuard]
-softdepend: [ShopGUIPlus, Essentials, LockettePro, Factions, UnioMarket, ASkyBlock, CombatTagPlus, TradeMe, UnioProtections, MythicMobs]
+depend: [Vault, WorldEdit, WorldGuard, Essentials, UnioEssentials, UnioProtections]
+softdepend: [ShopGUIPlus, LockettePro, Factions, UnioMarket, ASkyBlock, CombatLogX, TradeMe, MythicMobs]
 
 commands:
   uci:
     description: UnioCustomItems
-  fly:
-    description: Fly
   xpbottle:
     description: xpbottle
-  catvision:
-    description: CatVision
-    aliases: [kedigörüşü, kedigözü, kedigozu, kedigorusu]
-  energydrink:
-    description: Energy Drink
-    aliases: [enerjiiçeceği, enerji, enerjiicecegi]

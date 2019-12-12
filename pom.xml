@@ -154,11 +154,11 @@
             <systemPath>${library}/BossShopPro.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>CombatTagPlus</groupId>
-            <artifactId>CombatTagPlus</artifactId>
+            <groupId>UnioEssentials</groupId>
+            <artifactId>UnioEssentials</artifactId>
             <version>LATEST</version>
             <scope>system</scope>
-            <systemPath>${library}/CombatTagPlus.jar</systemPath>
+            <systemPath>${library112}/UnioEssentials.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>UnioProtections</groupId>

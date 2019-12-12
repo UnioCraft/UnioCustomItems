@@ -1,0 +1,314 @@
+items:
+  satisAsasi:
+    type: "GOLD_HOE"
+    name: "&dSatış Asası"
+    lore:
+      - "&6"
+      - "&7Bu asa ile bir sandığa sağ"
+      - "&7tıkladığınızda sandığın içindeki"
+      - "&7eşyalar sunucu marketine satılır."
+      - "&6"
+    flags:
+      - HIDE_ATTRIBUTES
+  tamirAsasi:
+    type: "GOLD_AXE"
+    name: "&dTamir Asası"
+    lore:
+      - "&6"
+      - "&7Bu asa ile bir sandığa sağ"
+      - "&7tıkladığınızda sandığın içindeki"
+      - "&7tüm eşyalar tamir edilir."
+      - "&6"
+    flags:
+      - HIDE_ATTRIBUTES
+  satisSandigi:
+    type: "CHEST"
+    name: "&bSatış Sandığı"
+    lore:
+      - "&6"
+      - "&7Bu sandığın içine giren"
+      - "&7eşyalar otomatik olarak"
+      - "&7sunucu marketine satılır."
+      - "&6"
+    flags:
+      - HIDE_ATTRIBUTES
+  ucusKarti:
+    type: "PAPER"
+    name: "&6Uçuş Kartı &7(Sağ Tıkla)"
+    lore:
+      - "&7Sınırsız uçuş hakkı kazanmak için sağ tıkla!"
+    flags:
+      - HIDE_ATTRIBUTES
+  buyuluAlanKazmasi:
+    type: "DIAMOND_PICKAXE"
+    name: "&cBüyülü Alan Kazması"
+    lore:
+      - "&6"
+      - "&7Bu kazmayla blok kırdığınızda"
+      - "&7çevresindeki 3x3'lük alandaki"
+      - "&7tüm blokları yok eder."
+      - "&6"
+      - "&7Bu kazmanın nasıl yapıldığı"
+      - "&7tam olarak bilinmese de"
+      - "&7kadim ırk kalıntısı olduğuna"
+      - "&7dair rivayetler mevcuttur."
+    enchants:
+      - "DURABILITY:10"
+      - "LOOT_BONUS_BLOCKS:8"
+    flags:
+      - HIDE_ATTRIBUTES
+      - HIDE_ENCHANTS
+  vaghlodarKazmasi:
+    type: "DIAMOND_PICKAXE"
+    name: "&5Vaghlodar Kazması"
+    lore:
+      - "&6"
+      - "&cBu kazma, karanlık &5Vaghlodar"
+      - "&cdağlarında kara büyüyle hapsedilen"
+      - "&cyakutları çıkarmak için dünyanın en"
+      - "&cbecerikli demir işlemecileri tarafından"
+      - "&cyapıldı."
+    enchants:
+      - "DIG_SPEED:10"
+      - "DURABILITY:8"
+      - "LOOT_BONUS_BLOCKS:5"
+  cilaliElmasKilic:
+    type: "DIAMOND_SWORD"
+    name: "&aCilalı Elmas Kılıç"
+    lore:
+      - "&6"
+      - "&cÖzel efsunlar ve yağlarla"
+      - "&cbezenmiş bir elmas kılıç."
+    enchants:
+      - "DAMAGE_ALL:8"
+      - "DAMAGE_UNDEAD:6"
+      - "FIRE_ASPECT:4"
+      - "LOOT_BONUS_MOBS:6"
+  buyuluLavanorYayi:
+    type: "BOW"
+    name: "&6Büyülü Lavanor Yayı"
+    lore:
+      - "&6"
+      - "&cLavanor yapımı büyülü yay."
+      - "&6"
+      - "&cBir elf şehri olan Lavanor"
+      - "&cokçuluk konusunda adını"
+      - "&cyedi diyarda duyurmuştur."
+      - "&6"
+    enchants:
+      - "ARROW_DAMAGE:8"
+      - "ARROW_KNOCKBACK:3"
+      - "ARROW_FIRE:2"
+      - "ARROW_INFINITE:1"
+  karaBuyuluVaghlodarKazmasi:
+    type: "DIAMOND_PICKAXE"
+    name: "&4&lKara Büyülü Vaghlodar Kazması"
+    lore:
+      - "&6"
+      - "&cVaghlodar Kazması'nın cadılar şehri."
+      - "&cSaffron'da kara büyüyle güçlendirilmiş"
+      - "&cbir kopyası. Yapımında çok masumun"
+      - "&ckanının döküldüğü rivayet edilir."
+    enchants:
+      - "DIG_SPEED:15"
+      - "DURABILITY:10"
+      - "LOOT_BONUS_BLOCKS:6"
+  kemikkiraninBaltasi:
+    type: "DIAMOND_AXE"
+    name: "&4&lKemikkıran'ın Baltası"
+    lore:
+      - "&6"
+      - "&cYedi diyarın en tehlikeli."
+      - "&cbosslarından biri olan Kemikkıran'ın"
+      - "&cçocuklarına yadigar bıraktığı balta."
+      - "&6"
+      - "&cSadece bu baltaya dokunmak için"
+      - "&ccanını vermiş şövalyeler vardır."
+    enchants:
+      - "DAMAGE_ALL:6"
+      - "DAMAGE_UNDEAD:8"
+      - "LOOT_BONUS_MOBS:4"
+      - "DURABILITY:10"
+      - "DIG_SPEED:10"
+      - "LOOT_BONUS_BLOCKS:5"
+  efsunlanmisElmasKask:
+    type: "DIAMOND_HELMET"
+    name: "&9Efsunlanmış Elmas Kask"
+    enchants:
+      - "PROTECTION_ENVIRONMENTAL:5"
+      - "DURABILITY:3"
+  efsunlanmisElmasZirh:
+    type: "DIAMOND_CHESTPLATE"
+    name: "&9Efsunlanmış Elmas Zırh"
+    enchants:
+      - "PROTECTION_ENVIRONMENTAL:5"
+      - "DURABILITY:3"
+  efsunlanmisElmasPantolon:
+    type: "DIAMOND_LEGGINGS"
+    name: "&9Efsunlanmış Elmas Pantolon"
+    enchants:
+      - "PROTECTION_ENVIRONMENTAL:5"
+      - "DURABILITY:3"
+  efsunlanmisElmasBot:
+    type: "DIAMOND_BOOTS"
+    name: "&9Efsunlanmış Elmas Bot"
+    enchants:
+      - "PROTECTION_ENVIRONMENTAL:5"
+      - "DURABILITY:3"
+  nadirKorumaEfsunu:
+    type: "ENCHANTED_BOOK"
+    name: "&6Nadir Koruma Efsunu"
+    lore:
+      - "&6"
+      - "&cBu efsunu örs ile"
+      - "&ckullanarak eşyalarınıza"
+      - "&cKoruma 5 büyüsü"
+      - "&cekleyebilirsiniz!"
+      - "&6"
+    bookenchants:
+      - "PROTECTION_ENVIRONMENTAL:5"
+  ganimetKilici:
+    type: "DIAMOND_SWORD"
+    name: "&6Ganimet Kılıcı"
+    enchants:
+      - "DAMAGE_ALL:5"
+      - "LOOT_BONUS_MOBS:5"
+  demircininRuyaKazmasi:
+    type: "DIAMOND_PICKAXE"
+    name: "&9Demircinin Rüya Kazması"
+    enchants:
+      - "DIG_SPEED:6"
+      - "DURABILITY:4"
+      - "LOOT_BONUS_BLOCKS:4"
+  pembepenceYumurta:
+    type: "MONSTER_EGG"
+    name: "&d&lPembepençe &fBoss Yumurtası"
+    lore:
+      - "&6"
+      - "&7Pembepençe'nin hapsolmuş ruhu"
+      - "&7bu yumurtanın içinde yatıyor."
+      - "&7Hemen çağır ve onun yozlaşmış"
+      - "&7ruhunu yok et!"
+      - "&6"
+  kemikkiranYumurta:
+    type: "MONSTER_EGG"
+    name: "&d&lKemikkıran &fBoss Yumurtası"
+    lore:
+      - "&6"
+      - "&7Kemikkıran'ın hapsolmuş ruhu"
+      - "&7bu yumurtanın içinde yatıyor."
+      - "&6"
+      - "&7DİKKAT! Kemikkıran oyundaki en"
+      - "&7güçlü yaratıklardan biridir"
+      - "&7ve tek başına öldürmen imkansız olabilir!"
+      - "&6"
+  yikimgetirenYumurta:
+    type: "MONSTER_EGG"
+    name: "&d&lYıkımgetiren &fBoss Yumurtası"
+    lore:
+      - "&6"
+      - "&7Yıkımgetiren'in hapsolmuş ruhu"
+      - "&7bu yumurtanın içinde yatıyor."
+      - "&6"
+      - "&7DİKKAT! Yıkımgetiren oyundaki en"
+      - "&7güçlü yaratıklardan biridir"
+      - "&7ve tek başına öldürmen imkansız olabilir!"
+      - "&6"
+  vahsiavciYumurta:
+    type: "MONSTER_EGG"
+    name: "&d&lVahşi Avcı &fBoss Yumurtası"
+    lore:
+      - "&6"
+      - "&7Vahşi Avcı'nın hapsolmuş ruhu"
+      - "&7bu yumurtanın içinde yatıyor."
+      - "&6"
+      - "&7DİKKAT! Vahşi Avcı oyundaki en"
+      - "&7güçlü yaratıklardan biridir"
+      - "&7ve tek başına öldürmen imkansız olabilir!"
+      - "&6"
+  yarimbeyinYumurta:
+    type: "MONSTER_EGG"
+    name: "&d&lYarımbeyin &fBoss Yumurtası"
+    lore:
+      - "&6"
+      - "&7Yarımbeyin'in hapsolmuş ruhu"
+      - "&7bu yumurtanın içinde yatıyor."
+      - "&6"
+  karacellatYumurta:
+    type: "MONSTER_EGG"
+    name: "&d&lKaracellat &fBoss Yumurtası"
+    lore:
+      - "&6"
+      - "&7Karacellat'ın hapsolmuş ruhu"
+      - "&7bu yumurtanın içinde yatıyor."
+      - "&6"
+  demirgovdeYumurta:
+    type: "MONSTER_EGG"
+    name: "&d&lDemirgövde &fBoss Yumurtası"
+    lore:
+      - "&6"
+      - "&7Demirgövde'nin hapsolmuş ruhu"
+      - "&7bu yumurtanın içinde yatıyor."
+      - "&6"
+  cehennemtazisiYumurta:
+    type: "MONSTER_EGG"
+    name: "&d&lCehennem Tazısı &fBoss Yumurtası"
+    lore:
+      - "&6"
+      - "&7Cehennem Tazısı'nın hapsolmuş ruhu"
+      - "&7bu yumurtanın içinde yatıyor."
+      - "&6"
+  vipKarti:
+    type: "MONSTER_EGG"
+    name: "&6VIP Kartı &7(Sağ Tıkla)"
+    lore:
+      - "&7Hesabına 1 aylık VIP üyelik"
+      - "&7etkinleştirmek için sağ tıkla."
+    flags:
+      - HIDE_ATTRIBUTES
+  vipPlusKarti:
+    type: "MONSTER_EGG"
+    name: "&6VIP+ Kartı &7(Sağ Tıkla)"
+    lore:
+      - "&7Hesabına 1 aylık VIP+ üyelik"
+      - "&7etkinleştirmek için sağ tıkla."
+    flags:
+      - HIDE_ATTRIBUTES
+  uvipKarti:
+    type: "MONSTER_EGG"
+    name: "&6UVIP Kartı &7(Sağ Tıkla)"
+    lore:
+      - "&7Hesabına 1 aylık UVIP üyelik"
+      - "&7etkinleştirmek için sağ tıkla."
+    flags:
+      - HIDE_ATTRIBUTES
+  uvipPlusKarti:
+    type: "MONSTER_EGG"
+    name: "&6UVIP+ Kartı &7(Sağ Tıkla)"
+    lore:
+      - "&7Hesabına 1 aylık UVIP+ üyelik"
+      - "&7etkinleştirmek için sağ tıkla."
+    flags:
+      - HIDE_ATTRIBUTES
+specialItems:
+  sellchest: "satisSandigi"
+  fixwand: "tamirAsasi"
+  sellwand: "satisAsasi"
+  multiblock: "buyuluAlanKazmasi"
+  flyperk: "ucusKarti"
+bossEggs:
+  pembepenceYumurta: "Pembepence"
+  kemikkiranYumurta: "Kemikkiran"
+  yikimgetirenYumurta: "Yikimgetiren"
+  vahsiavciYumurta: "VahsiAvci"
+  yarimbeyinYumurta: "Yarimbeyin"
+  karacellatYumurta: "Karacellat"
+  demirgovdeYumurta: "Demirgovde"
+  cehennemtazisiYumurta: "Cehennemtazisi"
+vipCards:
+  vipKarti: "VIP"
+  vipPlusKarti: "VIP+"
+  uvipKarti: "UVIP"
+  uvipPlusKarti: "UVIP+"
+flyPerm: "unioperks.fly.bypass"
+server: "Factions"

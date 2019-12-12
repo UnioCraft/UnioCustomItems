@@ -10,11 +10,11 @@ import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
-public class AnvilListeners implements Listener {
+public class EnchantmentBookListeners implements Listener {
 
     private CustomItems plugin;
 
-    public AnvilListeners(CustomItems plugin) {
+    public EnchantmentBookListeners(CustomItems plugin) {
         this.plugin = plugin;
     }
 

@@ -1,187 +1,179 @@
 package me.uniodex.uniocustomitems;
 
+import com.SirBlobman.combatlogx.CombatLogX;
+import com.earth2me.essentials.Essentials;
 import io.lumine.xikage.mythicmobs.MythicMobs;
-import me.uniodex.uniocustomitems.commands.MainCommands;
+import lombok.Getter;
+import me.uniodex.uniocustomitems.commands.CommandUCI;
+import me.uniodex.uniocustomitems.commands.CommandXPBottle;
 import me.uniodex.uniocustomitems.listeners.*;
 import me.uniodex.uniocustomitems.managers.*;
+import me.uniodex.uniocustomitems.managers.ConfigManager.Config;
 import me.uniodex.uniocustomitems.objects.FixWand;
 import me.uniodex.uniocustomitems.objects.SellChest;
-import me.uniodex.uniocustomitems.objects.SellHopper;
 import me.uniodex.uniocustomitems.objects.SellWand;
+import me.uniodex.uniocustomitems.utils.Utils;
 import me.uniodex.unioprotections.UnioProtections;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
-import net.minelink.ctplus.CombatTagPlus;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.List;
 import java.util.Random;
 
 public class CustomItems extends JavaPlugin {
 
-    public SellChest sellChest;
-    public SellHopper sellHopper;
-    public SellWand sellWand;
-    public FixWand fixWand;
-    private static Economy economy = null;
-    private static Permission permission = null;
-    public ConfigManager configManager;
-    public ItemManager itemManager;
-    public ExtensionManager extensionManager;
-    public PriceManager priceManager;
-    public FlyManager flyManager;
-    public XPBottleManager xpBottleManager;
-    private int voidChestSaveTimer;
-    public static String hataprefix = ChatColor.AQUA + "" + ChatColor.BOLD + "UNIOCRAFT " + ChatColor.DARK_GREEN + "->" + ChatColor.RED + " ";
-    public static String dikkatprefix = ChatColor.AQUA + "" + ChatColor.BOLD + "UNIOCRAFT " + ChatColor.DARK_GREEN + "->" + ChatColor.GOLD + " ";
-    public static String bilgiprefix = ChatColor.AQUA + "" + ChatColor.BOLD + "UNIOCRAFT " + ChatColor.DARK_GREEN + "->" + ChatColor.GREEN + " ";
-    public Plugin lockettePro;
-    public Plugin factions;
-    public Plugin askyblock;
-    public Plugin shopGui;
-    public Plugin essPlugin;
-    public Plugin unioMarket;
-    public UnioProtections unioProtections;
-    public CombatTagPlus ctplus;
-    public Plugin tradeMe;
-    public Random random = new Random();
-    public MythicMobs mythicMobs;
+    public static String hataPrefix;
+    public static String dikkatPrefix;
+    public static String bilgiPrefix;
+    public static String consolePrefix;
 
-    public static String nmsver;
-    public static CustomItems instance;
+    @Getter
+    private static CustomItems instance;
+
+    @Getter
+    private ConfigManager configManager;
+    @Getter
+    private ItemManager itemManager;
+    @Getter
+    private EconomyManager economyManager;
+    @Getter
+    private XPBottleManager xpBottleManager;
+    @Getter
+    private VIPManager vipManager;
+    @Getter
+    private HookManager hookManager;
+    @Getter
+    private LogManager logManager;
+
+    @Getter
+    private Economy economy;
+    @Getter
+    private Permission permission;
+
+    @Getter
+    private Plugin lockettePro;
+    @Getter
+    private Plugin factions;
+    @Getter
+    private Plugin askyblock;
+    @Getter
+    private Plugin shopGui;
+    @Getter
+    private Essentials essentials;
+    @Getter
+    private Plugin unioMarket;
+    @Getter
+    private UnioProtections unioProtections;
+    @Getter
+    private CombatLogX combatLogX;
+    @Getter
+    private Plugin tradeMe;
+    @Getter
+    private MythicMobs mythicMobs;
+
+    @Getter
+    private Random random = new Random();
+
+    @Getter
+    private SellChest sellChest;
+    @Getter
+    private SellWand sellWand;
+    @Getter
+    private FixWand fixWand;
+
+    private int voidChestSaveTimer;
 
     public void onEnable() {
-        if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
-            throw new RuntimeException("Could not find Vault! Plugin can not work without it!");
-        }
+        instance = this;
+        configManager = new ConfigManager(this);
+        initializePrefixes();
 
-        if ((shopGui = Bukkit.getPluginManager().getPlugin("ShopGUIPlus")) == null && (essPlugin = Bukkit.getPluginManager().getPlugin("Essentials")) == null) {
-            throw new RuntimeException("Could not find ShopGUIPlus or Essentials!");
-        }
+        essentials = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
+        shopGui = Bukkit.getPluginManager().getPlugin("ShopGUIPlus");
+        lockettePro = Bukkit.getPluginManager().getPlugin("LockettePro");
+        factions = Bukkit.getPluginManager().getPlugin("Factions");
+        askyblock = Bukkit.getPluginManager().getPlugin("ASkyBlock");
+        tradeMe = Bukkit.getPluginManager().getPlugin("TradeMe");
 
-        if (!Bukkit.getPluginManager().isPluginEnabled("WorldEdit")) {
-            throw new RuntimeException("Could not find WorldEdit! Plugin can not work without it!");
+        if (Bukkit.getPluginManager().isPluginEnabled("CombatLogX")) {
+            combatLogX = (CombatLogX) Bukkit.getPluginManager().getPlugin("CombatLogX");
         }
-
-        if (!Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
-            throw new RuntimeException("Could not find WorldGuard! Plugin can not work without it!");
-        }
-
-        if (Bukkit.getPluginManager().isPluginEnabled("LockettePro")) {
-            lockettePro = Bukkit.getPluginManager().getPlugin("LockettePro");
-        }
-
-        if (Bukkit.getPluginManager().isPluginEnabled("Factions")) {
-            factions = Bukkit.getPluginManager().getPlugin("Factions");
-        }
-
-        if (Bukkit.getPluginManager().isPluginEnabled("ASkyBlock")) {
-            askyblock = Bukkit.getPluginManager().getPlugin("ASkyBlock");
+        if (Bukkit.getPluginManager().isPluginEnabled("MythicMobs")) {
+            mythicMobs = (MythicMobs) Bukkit.getPluginManager().getPlugin("MythicMobs");
         }
 
         Bukkit.getScheduler().runTask(this, () -> {
-            if (Bukkit.getPluginManager().isPluginEnabled("UnioMarket")) {
-                unioMarket = Bukkit.getPluginManager().getPlugin("UnioMarket");
-            }
-        });
-
-        if (Bukkit.getPluginManager().isPluginEnabled("CombatTagPlus")) {
-            ctplus = (CombatTagPlus) Bukkit.getPluginManager().getPlugin("CombatTagPlus");
-        }
-
-        if (Bukkit.getPluginManager().isPluginEnabled("TradeMe")) {
-            tradeMe = Bukkit.getPluginManager().getPlugin("TradeMe");
-        }
-
-        Bukkit.getScheduler().runTask(this, () -> {
+            unioMarket = Bukkit.getPluginManager().getPlugin("UnioMarket");
             if (Bukkit.getPluginManager().isPluginEnabled("UnioProtections")) {
                 unioProtections = (UnioProtections) Bukkit.getPluginManager().getPlugin("UnioProtections");
             }
         });
 
-        if (Bukkit.getPluginManager().isPluginEnabled("MythicMobs")) {
-            mythicMobs = (MythicMobs) Bukkit.getPluginManager().getPlugin("MythicMobs");
-        }
+        setupVault();
 
-        nmsver = Bukkit.getServer().getClass().getPackage().getName();
-        nmsver = nmsver.substring(nmsver.lastIndexOf(".") + 1);
-        instance = this;
-
-        setupEconomy();
-        setupPermissions();
-        initializeData();
+        hookManager = new HookManager(this);
         itemManager = new ItemManager(this);
-        extensionManager = new ExtensionManager(this);
-        priceManager = new PriceManager(this);
-        flyManager = new FlyManager(this);
+        economyManager = new EconomyManager(this);
+        xpBottleManager = new XPBottleManager(this);
+        vipManager = new VIPManager(this);
+        logManager = new LogManager(this);
+
         sellChest = new SellChest(this);
-        sellHopper = new SellHopper(this);
         sellWand = new SellWand(this);
         fixWand = new FixWand(this);
-        xpBottleManager = new XPBottleManager(this);
-        Bukkit.getPluginManager().registerEvents(new BlockListeners(this), this);
-        Bukkit.getPluginManager().registerEvents(new InteractListeners(this), this);
-        Bukkit.getPluginManager().registerEvents(new FlyListeners(this), this);
+
+        Bukkit.getPluginManager().registerEvents(new BossEggListeners(this), this);
+        Bukkit.getPluginManager().registerEvents(new CardListeners(this), this);
+        Bukkit.getPluginManager().registerEvents(new EnchantmentBookListeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MultiblockListeners(this), this);
         Bukkit.getPluginManager().registerEvents(new ProtectionListeners(this), this);
-        Bukkit.getPluginManager().registerEvents(new SellChestListener(this), this);
-        Bukkit.getPluginManager().registerEvents(new XPBottleListener(this), this);
-        new MainCommands(this);
+        Bukkit.getPluginManager().registerEvents(new SellChestListeners(this), this);
+        Bukkit.getPluginManager().registerEvents(new WandListeners(this), this);
+        Bukkit.getPluginManager().registerEvents(new XPBottleListeners(this), this);
+
+        getCommand("uci").setExecutor(new CommandUCI(this));
+        getCommand("xpbottle").setExecutor(new CommandXPBottle(this));
+
         setupTimer();
     }
 
     public void onDisable() {
-        flyManager.onDisable();
         sellChest.saveChests();
         Bukkit.getScheduler().cancelTask(sellChest.voidChestTimer);
         Bukkit.getScheduler().cancelTask(voidChestSaveTimer);
     }
 
-    private void initializeData() {
-        configManager = new ConfigManager(this);
+    private void setupVault() {
+        RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
+        permission = rsp.getProvider();
+        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
+        economy = economyProvider.getProvider();
+    }
+
+    private void initializePrefixes() {
+        bilgiPrefix = getMessage("prefix.bilgiPrefix");
+        dikkatPrefix = getMessage("prefix.dikkatPrefix");
+        hataPrefix = getMessage("prefix.hataPrefix");
+        consolePrefix = getMessage("prefix.consolePrefix");
+    }
+
+    public String getMessage(String configSection) {
+        if (configManager.getConfig(Config.LANG).getString(configSection) == null) return null;
+
+        return Utils.colorizeMessage(configManager.getConfig(Config.LANG).getString(configSection));
+    }
+
+    public List<String> getMessages(String configSection) {
+        if (configManager.getConfig(Config.LANG).getStringList(configSection) == null) return null;
+
+        return Utils.colorizeMessages(configManager.getConfig(Config.LANG).getStringList(configSection));
     }
 
     private void setupTimer() {
         voidChestSaveTimer = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> sellChest.saveChests(), 6000L, 6000L);
     }
-
-    private boolean setupEconomy() {
-        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
-        if (economyProvider != null) {
-            economy = economyProvider.getProvider();
-        }
-
-        return (economy != null);
-    }
-
-    public Economy getEconomy() {
-        return economy;
-    }
-
-    private boolean setupPermissions() {
-        RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
-        if (permissionProvider != null) {
-            permission = permissionProvider.getProvider();
-        }
-        return (permission != null);
-    }
-
-    public Permission getPermission() {
-        return permission;
-    }
-
-    public Player getRandomUser() {
-        if (Bukkit.getOnlinePlayers().size() < 1) {
-            return null;
-        }
-        return Bukkit.getOnlinePlayers().iterator().next();
-    }
-
-    /* TODO
-        VIP Kartlarına işlev getir
-     */
 }
