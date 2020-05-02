@@ -2,7 +2,7 @@ prefix:
   bilgiPrefix: "&b&lUNIOCRAFT &2->&a"
   dikkatPrefix: "&b&lUNIOCRAFT &2->&6"
   hataPrefix: "&b&lUNIOCRAFT &2->&c"
-  consolePrefix: "[UnioEssentials] "
+  consolePrefix: "[UnioCustomItems] "
 commands:
   wrongCommand: "%hataPrefix% Hatalı bir komut girdiniz!"
   uci:
